@@ -14,25 +14,23 @@ public class Main {
      * @return 所要求的字符串
      */
     public static String printNumbersInOrder(int a, int b, int c) {
-        if (a > b && a > c) {
-            if (b > c) {
-                return String.format("%d>%d>%d", a, b , c);
-            } else {
-                return String.format("%d>%d>%d", a, c , b);
+        int[] array = {a, b, c};
+        String[] result = new String[array.length];
+
+        for (int i = 0; i < result.length; i++) {
+            int max = Integer.MIN_VALUE;
+            int maxIndex = 0;
+            for (int j = 0; j < array.length; j++) {
+                if (array[j] > max) {
+                    max = array[j];
+                    maxIndex = j;
+                }
             }
-        } else if (b > a && b > c) {
-            if (a > c) {
-                return String.format("%d>%d>%d", b, a , c);
-            } else {
-                return String.format("%d>%d>%d", b, c , a);
-            }
-        } else {
-            if (a > b) {
-                return String.format("%d>%d>%d", c, a , b);
-            } else {
-                return String.format("%d>%d>%d", c, b , a);
-            }
+            result[i] = Integer.toString(max);
+            array[maxIndex] = Integer.MIN_VALUE;
         }
+
+        return String.join(">", result);
     }
 
     public static void main(String[] args) {
